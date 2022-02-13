@@ -1,44 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-        
-        <script type="module">
-            // Import the functions you need from the SDKs you need
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
-            import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-analytics.js";
-            
-            // TODO: Add SDKs for Firebase products that you want to use
-            // https://firebase.google.com/docs/web/setup#available-libraries
-            
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
 
-            // Your web app's Firebase configuration
-            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-            const firebaseConfig = {
-                apiKey: "AIzaSyBQcyTzwhbwfQ5B58tiDTE7ZKFfdARKMrE",
-                authDomain: "biodeck-84375.firebaseapp.com",
-                projectId: "biodeck-84375",
-                storageBucket: "biodeck-84375.appspot.com",
-                messagingSenderId: "386306779175",
-                appId: "1:386306779175:web:62ecafc7c90a6b6e298602",
-                measurementId: "G-81194Z8S14"
-            };
-
-            // Initialize Firebase
-            const app = initializeApp(firebaseConfig);
-            const analytics = getAnalytics(app);
-        </script>
-        
-        
-      <script src="app.js" defer></script>
-</head>
-<body>
-    
-</body>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/9.6.6/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/9.6.6/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/9.6.6/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/9.6.6/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/9.6.6/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/9.6.6/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/9.6.6/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/9.6.6/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/9.6.6/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/9.6.6/firebase-performance-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Firebasics Project</h1>
+      <section id="whenSignedOut">
+        <p>To get started, sign in with your Google account.</p>
+        <button id="signInBtn" class="btn btn-primary">Sign In</button>
+      </section>
+      <section id="whenSignIn" hidden="true">
+        <div id="userDetails"></div>
+        <button id="signOutBtn">Sign Out</button>
+      </section>
+  </body>
 </html>
