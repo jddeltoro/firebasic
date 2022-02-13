@@ -1,2 +1,2 @@
 # firebasic
-Project to start working with firebase
+Project to start working with firebase, adding google authentication.
