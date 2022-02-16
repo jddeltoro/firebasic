@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             signInBtn.onclick = () => auth.signInWithPopup(provider);
             signOutBtn.onclick = () => auth.signOut();
-
+            let thignsRef;
+            let unsubscribe;
             auth.onAuthStateChanged(user =>{
                 if (user) {
                     divWhenSignedIn.hidden = false;
@@ -53,8 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const createThingBtn = document.getElementById('createThing');
                     const thingsList = document.getElementById('thingsList');
 
-                    let thignsRef = db.collection('things');
-                    let unsubscribe;
+                    thignsRef = db.collection('things');
 
                     createThingBtn.onclick = () => {
                         const name = prompt('Enter a name for the thing:');
@@ -67,7 +67,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     };
 
-                    unsubscribe = thignsRef.where('owner', '==', user.uid).onSnapshot(snapshot => {
+                    unsubscribe = thignsRef
+                    .where('owner', '==', user.uid)
+                    .orderBy('createdAt', 'desc')
+                    .onSnapshot(snapshot => {
                         thingsList.innerHTML = '';
                         snapshot.forEach(thing => {
                             thingsList.innerHTML += `
@@ -87,6 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     divWhenSignedIn.hidden = true;
                     divWhenSignedOut.hidden = false;
                     userDetails.innerHTML = '';
+                    unsubscribe && unsubscribe();
                 }
             });
 
