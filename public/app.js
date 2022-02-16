@@ -48,12 +48,49 @@ document.addEventListener('DOMContentLoaded', function () {
                             <strong>Provider Id:</strong> ${user.providerId}
                         </p>
                     `;
+
+                    const db = firebase.firestore();
+                    const createThingBtn = document.getElementById('createThing');
+                    const thingsList = document.getElementById('thingsList');
+
+                    let thignsRef = db.collection('things');
+                    let unsubscribe;
+
+                    createThingBtn.onclick = () => {
+                        const name = prompt('Enter a name for the thing:');
+                        if (name) {
+                            thignsRef.add({
+                                name: name,
+                                owner: user.uid,
+                                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                            });
+                        }
+                    };
+
+                    unsubscribe = thignsRef.where('owner', '==', user.uid).onSnapshot(snapshot => {
+                        thingsList.innerHTML = '';
+                        snapshot.forEach(thing => {
+                            thingsList.innerHTML += `
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        ${thing.data().name}
+                                    </div>
+                                    <span class="badge bg-primary rounded-pill">
+                                        ${thing.data().createdAt.toDate().toLocaleString()}
+                                    </span>
+                                </li>`;
+                        });
+                    });
+
+                    
                 } else {
                     divWhenSignedIn.hidden = true;
                     divWhenSignedOut.hidden = false;
                     userDetails.innerHTML = '';
                 }
             });
+
+            
         } catch (e) {
             console.error(e);
             loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
